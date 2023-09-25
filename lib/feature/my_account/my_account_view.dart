@@ -4,8 +4,8 @@ import 'package:rental_sale_app/feature/my_account/favorited_view.dart';
 import 'package:rental_sale_app/feature/my_account/purchased_rented_view.dart';
 
 class MyAccountView extends StatelessWidget {
-  MyAccountView({this.vehicleModel, super.key});
-  VehicleModel? vehicleModel;
+  const MyAccountView({this.vehicleModel, super.key});
+  final VehicleModel? vehicleModel;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

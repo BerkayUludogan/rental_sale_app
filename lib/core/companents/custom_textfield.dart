@@ -28,7 +28,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) => customField;
   final FocusNode _myFocusNode = FocusNode();
-  @override
   void dispose() {
     _myFocusNode.dispose();
   }

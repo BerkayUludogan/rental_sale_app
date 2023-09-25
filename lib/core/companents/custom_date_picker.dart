@@ -5,8 +5,8 @@ import 'package:rental_sale_app/core/constants/padding_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
 
 class CustomDatePicker extends StatefulWidget {
-  CustomDatePicker({required this.onDateTimeChanged, super.key});
-  void Function(DateTime) onDateTimeChanged;
+  const CustomDatePicker({required this.onDateTimeChanged, super.key});
+  final void Function(DateTime) onDateTimeChanged;
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
 }

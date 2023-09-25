@@ -6,6 +6,7 @@ import 'package:rental_sale_app/feature/my_account/favorited_view.dart';
 import 'package:rental_sale_app/product/manager/cache_manager.dart';
 import 'package:rental_sale_app/product/manager/vehicle_cache_manager.dart';
 
+// ignore: must_be_immutable
 class CarDetailsView extends StatefulWidget {
   CarDetailsView({required this.model, super.key});
   VehicleModel model;

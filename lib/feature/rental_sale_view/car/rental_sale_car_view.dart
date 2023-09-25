@@ -21,6 +21,7 @@ class _RentalSaleCarViewState extends RentalSaleCarViewModel {
           return InkWell(
             onTap: () {
               Navigator.of(context).push(
+                // ignore: inference_failure_on_instance_creation
                 MaterialPageRoute(
                   builder: (context) => CarDetailsView(model: model),
                 ),
