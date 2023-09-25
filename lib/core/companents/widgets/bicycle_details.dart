@@ -41,6 +41,7 @@ class _BicycleDetailsViewState extends State<BicycleDetailsView> {
             children: [
               _customBicycleBrand(context),
               const Divider(color: Colors.grey),
+              const Gap(20),
               _customBicycleColor(),
               const Divider(color: Colors.grey),
               const Gap(20),

@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
             context,
             title: StringConstant.myAccount,
             subtitle: StringConstant.myAccountDescription,
-            widget:  MyAccountView(),
+            widget: const MyAccountView(),
           ),
         ],
       ),
@@ -57,7 +57,7 @@ class HomeView extends StatelessWidget {
     required Widget widget,
   }) {
     return Card(
-      color: ColorConstant.floatActionColor,
+      //     color: ColorConstant.floatActionColor,
       child: ListTile(
         onTap: () => Navigator.of(context).push(
           // ignore: inference_failure_on_instance_creation

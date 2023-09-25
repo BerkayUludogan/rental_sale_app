@@ -6,6 +6,6 @@ class ColorConstant {
   static Color themeColor = Colors.lightBlue.shade400;
   static Color textColor = Colors.black;
   static Color hintTextColor = Colors.grey;
-  static Color floatActionColor = Colors.lightBlueAccent.shade100;
+  static Color floatActionColor = Colors.brown;
   static Color backgroundColor = Colors.white;
 }
