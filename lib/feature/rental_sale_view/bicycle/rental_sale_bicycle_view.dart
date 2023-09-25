@@ -37,39 +37,55 @@ class _RentalSaleBicycleViewState extends RentalSaleBicycleViewModel {
   Card _baseCard(BicycleModel model) {
     return Card(
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          child: Text(
-            model.year.toString(),
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(fontWeight: FontWeight.bold),
-          ),
-        ),
-        title: Text(
-          '${model.brand?.toUpperCase()} - ${model.frameType?.toUpperCase()} ',
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Text(
-          model.price.toString(),
-        ),
-        trailing: IconButton(
-          icon: Icon(
-            model.isFavorite!
-                ? Icons.favorite_rounded
-                : Icons.favorite_outline_rounded,
-            color: model.isFavorite! ? Colors.red : Colors.black,
-          ),
-          onPressed: () async {
-            setState(() {});
-            model.isFavorite = !model.isFavorite!;
-            await _savedFavorite(model);
-          },
-        ),
+        leading: _leading(model),
+        title: _title(model),
+        subtitle: _subTitle(model),
+        trailing: _trailing(model),
+      ),
+    );
+  }
+
+  IconButton _trailing(BicycleModel model) {
+    return IconButton(
+      icon: Icon(
+        model.isFavorite!
+            ? Icons.favorite_rounded
+            : Icons.favorite_outline_rounded,
+        color: model.isFavorite! ? Colors.red : Colors.black,
+      ),
+      onPressed: () async {
+        setState(() {});
+        model.isFavorite = !model.isFavorite!;
+        await _savedFavorite(model);
+      },
+    );
+  }
+
+  Text _subTitle(BicycleModel model) {
+    return Text(
+      model.price.toString(),
+    );
+  }
+
+  Text _title(BicycleModel model) {
+    return Text(
+      '${model.brand?.toUpperCase()} - ${model.frameType?.toUpperCase()} ',
+      style: Theme.of(context)
+          .textTheme
+          .bodyMedium!
+          .copyWith(fontWeight: FontWeight.bold),
+    );
+  }
+
+  CircleAvatar _leading(BicycleModel model) {
+    return CircleAvatar(
+      backgroundColor: Colors.transparent,
+      child: Text(
+        model.year.toString(),
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium!
+            .copyWith(fontWeight: FontWeight.bold),
       ),
     );
   }

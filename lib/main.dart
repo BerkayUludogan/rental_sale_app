@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:rental_sale_app/core/constants/color_constant.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/home/home_view.dart';
 
 void main() async {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Rental and Sale ',
+      title: StringConstant.appTitle,
       theme: ThemeData(
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: ColorConstant.themeColor,
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           elevation: 1,
-          title: const Text('Rental and Sale'),
+          title: const Text(StringConstant.appTitle),
         ),
         body: const Center(child: HomeView()),
       ),

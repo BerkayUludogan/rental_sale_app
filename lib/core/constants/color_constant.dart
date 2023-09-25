@@ -8,4 +8,5 @@ class ColorConstant {
   static Color hintTextColor = Colors.grey;
   static Color floatActionColor = Colors.brown;
   static Color backgroundColor = Colors.white;
+  static Color dividerColor = Colors.grey;
 }

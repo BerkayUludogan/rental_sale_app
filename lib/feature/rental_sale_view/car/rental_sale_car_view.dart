@@ -38,41 +38,57 @@ class _RentalSaleCarViewState extends RentalSaleCarViewModel {
 
   ListTile _baseListTile(VehicleModel model, int index) {
     return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        child: Text(
-          model.year.toString(),
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontWeight: FontWeight.bold),
-        ),
+      leading: _leading(model),
+      title: _title(model),
+      subtitle: _subTitle(model),
+      trailing: _trailing(model),
+    );
+  }
+
+  IconButton _trailing(VehicleModel model) {
+    return IconButton(
+      icon: Icon(
+        model.isFavorite!
+            ? Icons.favorite_rounded
+            : Icons.favorite_outline_rounded,
+        color: model.isFavorite! ? Colors.red : Colors.black,
       ),
-      title: Text(
-        '${model.brand} - ${model.model!.toUpperCase()}',
+      onPressed: () async {
+        setState(() {});
+        model.isFavorite = !model.isFavorite!;
+        await _savedFavorite(model);
+      },
+    );
+  }
+
+  Text _subTitle(VehicleModel model) {
+    return Text(
+      model.price.toString(),
+      style: const TextStyle(
+        fontSize: 15,
+      ),
+    );
+  }
+
+  Text _title(VehicleModel model) {
+    return Text(
+      '${model.brand} - ${model.model!.toUpperCase()}',
+      style: Theme.of(context)
+          .textTheme
+          .bodyMedium!
+          .copyWith(fontWeight: FontWeight.bold),
+    );
+  }
+
+  CircleAvatar _leading(VehicleModel model) {
+    return CircleAvatar(
+      backgroundColor: Colors.transparent,
+      child: Text(
+        model.year.toString(),
         style: Theme.of(context)
             .textTheme
             .bodyMedium!
             .copyWith(fontWeight: FontWeight.bold),
-      ),
-      subtitle: Text(
-        model.price.toString(),
-        style: const TextStyle(
-          fontSize: 15,
-        ),
-      ),
-      trailing: IconButton(
-        icon: Icon(
-          model.isFavorite!
-              ? Icons.favorite_rounded
-              : Icons.favorite_outline_rounded,
-          color: model.isFavorite! ? Colors.red : Colors.black,
-        ),
-        onPressed: () async {
-          setState(() {});
-          model.isFavorite = !model.isFavorite!;
-          await _savedFavorite(model);
-        },
       ),
     );
   }
@@ -84,16 +100,3 @@ class _RentalSaleCarViewState extends RentalSaleCarViewModel {
     );
   }
 }
-
-
-        /*   IconButton(
-        icon: const Icon(
-          Icons.favorite_outline_rounded,
-        ),
-        onPressed: () {
-          setState(() {
-
-          });
-          print('${model.brand} favoriye eklendi.');
-        },
-      ), */

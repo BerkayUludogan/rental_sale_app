@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:rental_sale_app/core/constants/color_constant.dart';
 import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
 import 'package:rental_sale_app/feature/my_account/favorited_view.dart';
@@ -38,16 +39,16 @@ class _CarDetailsViewState extends State<MotocycleDetailsView> {
           children: [
             _customMotocycleBrand(context),
             _customMotocycleModel(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(30),
             _customMotocycleColor(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(30),
             _customMotocycleModelYear(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(30),
             _customMotocyclePrice(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(40),
             _customPurchasedButton(context),
           ],
@@ -86,7 +87,7 @@ class _CarDetailsViewState extends State<MotocycleDetailsView> {
 
   Widget _customMotocycleModelYear() {
     return _customText(
-      informationText: StringConstant.carModelYear,
+      informationText: StringConstant.carYear,
       value: widget.model.year.toString(),
     );
   }
@@ -123,11 +124,11 @@ class _CarDetailsViewState extends State<MotocycleDetailsView> {
       children: [
         Text(
           informationText,
-          style: const TextStyle(fontSize: 22),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Text(
           value,
-          style: const TextStyle(fontSize: 22),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 @immutable
 final class StringConstant {
   const StringConstant._();
+  static const String appTitle = 'Rental and Sale ';
   static const String purchased = 'SATIN AL';
   static const String carBrand = 'Araba Markası';
   static const String carModel = 'Araba Modeli';

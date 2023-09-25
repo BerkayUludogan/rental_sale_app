@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:rental_sale_app/core/constants/color_constant.dart';
 import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
 import 'package:rental_sale_app/feature/my_account/favorited_view.dart';
@@ -38,16 +39,16 @@ class _CarDetailsViewState extends State<CarDetailsView> {
           children: [
             _customBrand(context),
             _customCarModel(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(30),
             _customCarColor(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(30),
             _customCarModelYear(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(30),
             _customCarPrice(),
-            const Divider(color: Colors.grey),
+            Divider(color: ColorConstant.dividerColor),
             const Gap(40),
             _customPurchasedButton(context),
           ],
@@ -77,28 +78,28 @@ class _CarDetailsViewState extends State<CarDetailsView> {
     );
   }
 
-  Row _customCarPrice() {
+  Widget _customCarPrice() {
     return _customText(
       informationText: StringConstant.carPrice,
       value: widget.model.price!.toUpperCase(),
     );
   }
 
-  Row _customCarModelYear() {
+  Widget _customCarModelYear() {
     return _customText(
-      informationText: StringConstant.carModelYear,
+      informationText: StringConstant.carYear,
       value: widget.model.year.toString(),
     );
   }
 
-  Row _customCarColor() {
+  Widget _customCarColor() {
     return _customText(
       informationText: StringConstant.carColor,
       value: widget.model.color!.toUpperCase(),
     );
   }
 
-  Row _customCarModel() {
+  Widget _customCarModel() {
     return _customText(
       informationText: StringConstant.carModel,
       value: widget.model.model!.toUpperCase(),
@@ -107,12 +108,12 @@ class _CarDetailsViewState extends State<CarDetailsView> {
 
   Container _customBrand(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
-      width: MediaQuery.of(context).size.width + 50,
+      height: MediaQuery.of(context).size.height * 0.15,
+      width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
       child: Text(
         widget.model.brand!,
-        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }
@@ -123,11 +124,11 @@ class _CarDetailsViewState extends State<CarDetailsView> {
       children: [
         Text(
           informationText,
-          style: const TextStyle(fontSize: 22),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Text(
           value,
-          style: const TextStyle(fontSize: 22),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );

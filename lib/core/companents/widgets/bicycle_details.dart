@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:rental_sale_app/core/constants/color_constant.dart';
 import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_bicycle/model/bicycle_model.dart';
 import 'package:rental_sale_app/product/manager/bicycle_cache_manager.dart';
@@ -40,34 +41,34 @@ class _BicycleDetailsViewState extends State<BicycleDetailsView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _customBicycleBrand(context),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleColor(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleWheelSize(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleFrameType(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleFrameSize(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleFrontBrake(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleRearBrake(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleNumberOfGears(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicycleYear(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customBicyclePrice(),
-              const Divider(color: Colors.grey),
+              Divider(color: ColorConstant.dividerColor),
               const Gap(20),
               _customPurchasedButton(context),
               const Gap(20),
@@ -109,11 +110,11 @@ class _BicycleDetailsViewState extends State<BicycleDetailsView> {
       children: [
         Text(
           informationText,
-          style: const TextStyle(fontSize: 22),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Text(
           value,
-          style: const TextStyle(fontSize: 22),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );
@@ -121,12 +122,12 @@ class _BicycleDetailsViewState extends State<BicycleDetailsView> {
 
   Container _customBicycleBrand(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: MediaQuery.of(context).size.height * 0.15,
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
       child: Text(
         widget.model.brand!.toUpperCase(),
-        style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }
