@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sale_app/core/companents/widgets/motocycle_details.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
 import 'package:rental_sale_app/feature/rental_sale_view/motocycle/rental_sale_motocycle_viewmodel.dart';
 
@@ -20,11 +21,12 @@ class _RentalSaleMotocycleViewState extends RentalSaleMotocycleViewModel {
           final model = vehicleModelList[index];
           return InkWell(
             onTap: () {
-              /*   Navigator.of(context).push(
+              Navigator.of(context).push(
+                // ignore: inference_failure_on_instance_creation
                 MaterialPageRoute(
-                  builder: (context) => CarDetailsView(model: model),
+                  builder: (context) => MotocycleDetailsView(model: model),
                 ),
-              ); */
+              );
             },
             child: Card(
               child: _baseListTile(model, index),

@@ -36,6 +36,8 @@ class _AddListingBicycleViewState extends AddListingBicycleViewModel {
                 const Gap(30),
                 _bicycleBrand(),
                 const Gap(20),
+                _bicycleColor(),
+                const Gap(20),
                 _bicycleWheelSize(),
                 const Gap(20),
                 _bicycleFrameType(),
@@ -219,6 +221,32 @@ class _AddListingBicycleViewState extends AddListingBicycleViewModel {
       onChanged: (p0) {
         bicycleModel = bicycleModel.copyWith(price: p0);
       },
+    );
+  }
+
+  Widget _bicycleColor() {
+    return Container(
+      decoration: BoxDecoration(border: Border.all()),
+      padding: PaddingConstant.paddinAllLow,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            StringConstant.bicycleColor,
+            style: context.textTheme.titleMedium
+                ?.copyWith(color: ColorConstant.textColor),
+          ),
+          CustomDropDownButton(
+            choosedValue: bicycleModel.color ?? colorList.first,
+            list: colorList,
+            onItemSelected: (String value) {
+              setState(() {
+                bicycleModel = bicycleModel.copyWith(color: value);
+              });
+            },
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sale_app/core/companents/widgets/bicycle_details.dart';
+import 'package:rental_sale_app/feature/add_listing/add_listing_bicycle/model/bicycle_model.dart';
 import 'package:rental_sale_app/feature/rental_sale_view/bicycle/rental_sale_bicycle_viewmodel.dart';
 
 class RentalSaleBicycleView extends StatefulWidget {
@@ -16,23 +18,56 @@ class _RentalSaleBicycleViewState extends RentalSaleBicycleViewModel {
         itemCount: bicycleModelList.length,
         itemBuilder: (BuildContext context, int index) {
           final model = bicycleModelList[index];
-          return Card(
-            child: ListTile(
-              leading: Text(
-                model.year.toString(),
-              ),
-              title: Text(model.brand?.toUpperCase() ?? ''),
-              subtitle: Text(
-                model.frameType?.toUpperCase() ?? '',
-              ),
-              trailing: Text(
-                model.price.toString(),
-                style: const TextStyle(fontSize: 15, color: Colors.red),
-              ),
-            ),
+          return InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                // ignore: inference_failure_on_instance_creation
+                MaterialPageRoute(
+                  builder: (context) => BicycleDetailsView(model: model),
+                ),
+              );
+            },
+            child: _baseCard(model),
           );
         },
       ),
+    );
+  }
+
+  Card _baseCard(BicycleModel model) {
+    return Card(
+      child: ListTile(
+        leading: Text(
+          model.year.toString(),
+        ),
+        title: Text(
+          '${model.brand?.toUpperCase()} - ${model.frameType?.toUpperCase()} ',
+        ),
+        subtitle: Text(
+          model.price.toString(),
+          style: const TextStyle(fontSize: 15, color: Colors.red),
+        ),
+        trailing: IconButton(
+          icon: Icon(
+            model.isFavorite!
+                ? Icons.favorite_rounded
+                : Icons.favorite_outline_rounded,
+            color: model.isFavorite! ? Colors.red : Colors.black,
+          ),
+          onPressed: () async {
+            setState(() {});
+            model.isFavorite = !model.isFavorite!;
+            await _savedFavorite(model);
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _savedFavorite(BicycleModel model) async {
+    await cacheManager.putItem(
+      model.id!,
+      model,
     );
   }
 }

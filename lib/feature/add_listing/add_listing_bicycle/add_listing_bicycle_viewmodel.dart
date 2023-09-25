@@ -20,15 +20,6 @@ abstract class AddListingBicycleViewModel extends State<AddListingBicycleView> {
   @override
   void initState() {
     super.initState();
-    bicycleModel = bicycleModel.copyWith(
-      frameSize: BicycleProperty.frameSize.first,
-      frameType: BicycleProperty.frameType.first,
-      rearBrake: BicycleProperty.brakeType.first,
-      frontBrake: BicycleProperty.brakeType.first,
-      numberOfGears: BicycleProperty.numberOfGears.first,
-      wheelSize: BicycleProperty.wheelSizeList.first,
-      year: DateConstant.date.year,
-    );
 
     brandList = List.generate(
       BicycleBrand.values.length,
@@ -39,9 +30,15 @@ abstract class AddListingBicycleViewModel extends State<AddListingBicycleView> {
       EnumColor.values.length,
       (index) => EnumColor.values[index].name,
     );
-
     bicycleModel = bicycleModel.copyWith(
       brand: brandList.first,
+      frameSize: BicycleProperty.frameSize.first,
+      frameType: BicycleProperty.frameType.first,
+      rearBrake: BicycleProperty.brakeType.first,
+      frontBrake: BicycleProperty.brakeType.first,
+      numberOfGears: BicycleProperty.numberOfGears.first,
+      wheelSize: BicycleProperty.wheelSizeList.first,
+      year: DateConstant.date.year,
       color: colorList.first,
     );
 
