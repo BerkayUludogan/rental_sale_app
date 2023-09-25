@@ -37,15 +37,25 @@ class _RentalSaleBicycleViewState extends RentalSaleBicycleViewModel {
   Card _baseCard(BicycleModel model) {
     return Card(
       child: ListTile(
-        leading: Text(
-          model.year.toString(),
+        leading: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          child: Text(
+            model.year.toString(),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(fontWeight: FontWeight.bold),
+          ),
         ),
         title: Text(
           '${model.brand?.toUpperCase()} - ${model.frameType?.toUpperCase()} ',
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
         subtitle: Text(
           model.price.toString(),
-          style: const TextStyle(fontSize: 15, color: Colors.red),
         ),
         trailing: IconButton(
           icon: Icon(

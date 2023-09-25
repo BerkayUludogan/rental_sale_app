@@ -38,16 +38,22 @@ class _RentalSaleCarViewState extends RentalSaleCarViewModel {
 
   ListTile _baseListTile(VehicleModel model, int index) {
     return ListTile(
-      leading: Text(
-        model.year.toString(),
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
+      leading: CircleAvatar(
+        backgroundColor: Colors.transparent,
+        child: Text(
+          model.year.toString(),
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       title: Text(
         '${model.brand} - ${model.model!.toUpperCase()}',
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(fontWeight: FontWeight.bold),
       ),
       subtitle: Text(
         model.price.toString(),
