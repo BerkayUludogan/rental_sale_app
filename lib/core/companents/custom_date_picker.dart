@@ -23,6 +23,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             initialDateTime: DateConstant.date,
             mode: CupertinoDatePickerMode.monthYear,
             onDateTimeChanged: widget.onDateTimeChanged,
+            
+            backgroundColor: ColorConstant.backgroundColor,
           ),
         ),
         child: Text(
@@ -39,6 +41,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       context: context,
       builder: (BuildContext context) => Container(
         height: 200,
+        width: MediaQuery.of(context).size.width + 100,
         padding: PaddingConstant.onlyTopMid,
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,

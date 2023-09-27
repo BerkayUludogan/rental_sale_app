@@ -13,8 +13,6 @@ abstract class ICacheManager<T extends HiveModel<T>> {
     }
   }
 
-  // Future<void> addItems(List<T> items);
-  // Future<void> putItems(List<T> items);
   T? getItem(String id);
   List<T>? getValues();
   Future<void> putItem(String key, T model);
