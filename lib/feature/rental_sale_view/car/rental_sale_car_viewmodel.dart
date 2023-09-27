@@ -14,7 +14,7 @@ abstract class RentalSaleCarViewModel extends State<RentalSaleCarView> {
     super.initState();
     cacheManager = VehicleCacheManager(VehicleModel());
     fetchDatas();
-    print(cacheManager.model.brand);
+    
   }
 
   Future<void> fetchDatas() async {
