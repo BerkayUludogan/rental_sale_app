@@ -24,6 +24,7 @@ dependencies:
   keyboard_dismisser: ^3.0.0
   hive: ^2.2.3
   flutter_localized_locales: ^2.0.4
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

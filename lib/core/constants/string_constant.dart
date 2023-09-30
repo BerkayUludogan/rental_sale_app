@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 final class StringConstant {
   const StringConstant._();
   static const String appTitle = 'Rental and Sale ';
-  static const String purchased = 'SATIN AL';
+  static const String buy = 'SATIN AL';
   static const String carBrand = 'Araba Markası';
   static const String carModel = 'Araba Modeli';
   static const String carColor = 'Araba Rengi';
@@ -44,6 +44,8 @@ final class StringConstant {
   static const String car = 'Araba';
   static const String motorcycle = 'Motosiklet';
   static const String bicycle = 'Bisiklet';
+
+  static const String purchased = 'SATIN ALINDI';
 
   static const String addListing = 'İlan Ver';
   static const String rentalSaleTitle = 'Kiralama ve Satış';

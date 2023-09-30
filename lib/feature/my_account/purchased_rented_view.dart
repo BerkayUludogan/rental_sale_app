@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_bicycle/model/bicycle_model.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
 import 'package:rental_sale_app/product/manager/bicycle_cache_manager.dart';
@@ -49,6 +50,10 @@ class _PurchasedRentedViewState extends State<PurchasedRentedView> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
+              ),
+              trailing: const Text(
+                StringConstant.purchased,
+                style: TextStyle(color: Colors.red),
               ),
             ),
           );

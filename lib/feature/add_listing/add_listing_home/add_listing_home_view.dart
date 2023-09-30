@@ -54,5 +54,4 @@ class _AddListingHomeViewState extends State<AddListingHomeView> {
         notchMargin: -5,
         child: customTabbar(),
       );
-//void Function(String) onPressed;
 }

@@ -17,7 +17,7 @@ class AddListingViewModel {
       children: [
         AddListingCarView(),
         AddListingMotocycleView(),
-        AddListingBicycleView()
+        AddListingBicycleView(),
       ],
     );
   }

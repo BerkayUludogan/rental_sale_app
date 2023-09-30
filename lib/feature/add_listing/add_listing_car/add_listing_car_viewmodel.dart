@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rental_sale_app/core/constants/date_constant.dart';
 import 'package:rental_sale_app/core/enums/brand.dart';
 import 'package:rental_sale_app/core/enums/colors.dart';
@@ -17,6 +17,8 @@ abstract class AddListingCarViewModel extends State<AddListingCarView> {
   late ICacheManager<VehicleModel> cacheManager;
   VehicleModel vehicleModel = VehicleModel();
 
+  FToast? fToast;
+
   final carBrandController = TextEditingController();
   final carModelController = TextEditingController();
   final carColorController = TextEditingController();
@@ -26,6 +28,9 @@ abstract class AddListingCarViewModel extends State<AddListingCarView> {
   @override
   void initState() {
     super.initState();
+
+    fToast = FToast();
+    fToast?.init(context);
 
     brandList = List.generate(
       CarBrand.values.length,
@@ -47,19 +52,8 @@ abstract class AddListingCarViewModel extends State<AddListingCarView> {
 
   Future<void> init() async {
     cacheManager = VehicleCacheManager(VehicleModel());
-     // await Hive.deleteBoxFromDisk(VehicleModel().modelKey);
+    // await Hive.deleteBoxFromDisk(VehicleModel().modelKey);
     await cacheManager.init();
-    fetchDatas();
-  }
-
-  Future<void> fetchDatas() async {
-    //await cacheManager.clearAll();
-
-    /*   final bicycleModel = cacheManager.getValues();
-    if (bicycleModel == null) return;
-    print(bicycleModel.first);
-    bicycleModel.first = bicycleModel.first.copyWith(isFavorite: true);
-    await cacheManager.putItem(bicycleModel.first.id!, bicycleModel.first); */
   }
 
   @override
@@ -89,10 +83,29 @@ abstract class AddListingCarViewModel extends State<AddListingCarView> {
         uuid,
         vehicleModel,
       );
+
+      showCustomToast();
     } catch (error) {
       print(error);
     }
+  }
 
-    print("Kayıt başarılı");
+  void showCustomToast() {
+    final Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        color: Colors.blueGrey,
+      ),
+      child: const Text(
+        'Araç İlana Eklendi ',
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+
+    fToast?.showToast(
+      child: toast,
+      toastDuration: const Duration(seconds: 1),
+    );
   }
 }

@@ -11,20 +11,38 @@ class MyAccountView extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          bottom: const TabBar(tabs: [
-            Tab(
-              icon: Icon(Icons.directions_car),
+        appBar: _mainAppBar(),
+        body: _mainBody(),
+      ),
+    );
+  }
+
+  TabBarView _mainBody() {
+    return const TabBarView(
+      children: [
+        PurchasedRentedView(),
+        FavoritedView(),
+      ],
+    );
+  }
+
+  AppBar _mainAppBar() {
+    return AppBar(
+      bottom: const TabBar(
+        tabs: [
+          Tab(
+            icon: Icon(
+              Icons.sell,
+              color: Colors.greenAccent,
             ),
-            Tab(icon: Icon(Icons.directions_transit)),
-          ]),
-        ),
-        body: const TabBarView(
-          children: [
-            PurchasedRentedView(),
-            FavoritedView(),
-          ],
-        ),
+          ),
+          Tab(
+            icon: Icon(
+              Icons.favorite_outlined,
+              color: Colors.red,
+            ),
+          ),
+        ],
       ),
     );
   }
