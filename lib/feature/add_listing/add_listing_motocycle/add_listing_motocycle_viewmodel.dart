@@ -13,8 +13,10 @@ abstract class AddListingMotoCycleViewModel
     extends State<AddListingMotocycleView> {
   late List<String> brandList = [];
   late List<String> colorList = [];
+
   late ICacheManager<VehicleModel> cacheManager;
   VehicleModel vehicleModel = VehicleModel();
+
   @override
   void initState() {
     super.initState();
@@ -58,6 +60,5 @@ abstract class AddListingMotoCycleViewModel
       uuid,
       vehicleModel,
     );
-    print('kayit başarılı');
   }
 }

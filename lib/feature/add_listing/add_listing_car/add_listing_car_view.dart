@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:rental_sale_app/core/companents/custom_date_picker.dart';
-import 'package:rental_sale_app/core/companents/custom_dropdown.dart';
-import 'package:rental_sale_app/core/companents/custom_textfield.dart';
+import 'package:rental_sale_app/core/companents/custom_choosedbrand.dart';
+import 'package:rental_sale_app/core/companents/custom_choosedcolor_field.dart';
+import 'package:rental_sale_app/core/companents/custom_model_text.dart';
+import 'package:rental_sale_app/core/companents/custom_modelyear_field.dart';
+import 'package:rental_sale_app/core/companents/custom_price_text_field.dart';
 import 'package:rental_sale_app/core/companents/widgets/baseview.dart';
-import 'package:rental_sale_app/core/constants/color_constant.dart';
 import 'package:rental_sale_app/core/constants/date_constant.dart';
 import 'package:rental_sale_app/core/constants/padding_constant.dart';
 import 'package:rental_sale_app/core/constants/string_constant.dart';
-import 'package:rental_sale_app/core/extensions/context_extension.dart';
-import 'package:rental_sale_app/core/utils/textformfield_format.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/add_listing_car_viewmodel.dart';
 
 class AddListingCarView extends StatefulWidget {
@@ -30,15 +28,10 @@ class _AddListingCarState extends AddListingCarViewModel {
 
     return BaseView(
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Padding(
             padding: PaddingConstant.scaffoldPadding,
             child: SizedBox(
-              height: isKeyboardOpen
-                  ? MediaQuery.of(context).size.height
-                  : MediaQuery.of(context).size.height -
-                      (kToolbarHeight + kBottomNavigationBarHeight + 20),
               child: Column(
                 children: [
                   const Gap(30),
@@ -50,7 +43,8 @@ class _AddListingCarState extends AddListingCarViewModel {
                   const Gap(20),
                   _carModelYear(context),
                   const Gap(20),
-                  carPrice(),
+                  _carPrice(),
+                  const Gap(20),
                 ],
               ),
             ),
@@ -60,37 +54,22 @@ class _AddListingCarState extends AddListingCarViewModel {
     );
   }
 
-  Container _choosedBrand() {
-    return Container(
-      padding: PaddingConstant.paddinAllLow,
-      decoration: BoxDecoration(border: Border.all()),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            StringConstant.carBrand,
-            style: context.textTheme.titleMedium
-                ?.copyWith(color: ColorConstant.textColor),
-          ),
-          CustomDropDownButton(
-            choosedValue: vehicleModel.brand ?? brandList.first,
-            list: brandList,
-            onItemSelected: (String value) {
-              setState(() {
-                vehicleModel = vehicleModel.copyWith(brand: value);
-              });
-            },
-          ),
-        ],
-      ),
+  Widget _choosedBrand() {
+    return CustomChoosedBrand(
+      choosedValue: vehicleModel.brand ?? brandList.first,
+      list: brandList,
+      onItemSelected: (String value) {
+        setState(() {
+          vehicleModel = vehicleModel.copyWith(brand: value);
+        });
+      },
+      text: StringConstant.carBrand,
     );
   }
 
   Widget carModelText() {
-    return CustomTextField(
+    return CustomModelText(
       hintText: StringConstant.carModelEntry,
-      inputType: TextInputType.name,
-      action: TextInputAction.next,
       onChanged: (value) {
         vehicleModel = vehicleModel.copyWith(model: value);
       },
@@ -98,69 +77,35 @@ class _AddListingCarState extends AddListingCarViewModel {
   }
 
   Widget _choosedCarColor() {
-    return Container(
-      decoration: BoxDecoration(border: Border.all()),
-      padding: PaddingConstant.paddinAllLow,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            StringConstant.carColor,
-            style: context.textTheme.titleMedium
-                ?.copyWith(color: ColorConstant.textColor),
-          ),
-          CustomDropDownButton(
-            choosedValue: vehicleModel.color ?? colorList.first,
-            list: colorList,
-            onItemSelected: (String value) {
-              setState(() {
-                vehicleModel = vehicleModel.copyWith(color: value);
-              });
-            },
-          ),
-        ],
-      ),
+    return CustomChoosedColor(
+      choosedValue: vehicleModel.color ?? colorList.first,
+      onItemSelected: (String value) {
+        setState(() {
+          vehicleModel = vehicleModel.copyWith(color: value);
+        });
+      },
+      text: StringConstant.carColor,
     );
   }
 
   Widget _carModelYear(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(border: Border.all()),
-      padding: PaddingConstant.paddinAllLow,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            StringConstant.carModelYear,
-            style: context.textTheme.titleMedium
-                ?.copyWith(color: ColorConstant.textColor),
-          ),
-          CustomDatePicker(
-            onDateTimeChanged: (DateTime newDate) {
-              setState(
-                () => DateConstant.date = newDate,
-              );
-              vehicleModel = vehicleModel.copyWith(year: newDate.year);
-            },
-          ),
-        ],
-      ),
+    return CustomModelYearField(
+      onDateTimeChanged: (DateTime newDate) {
+        setState(
+          () => DateConstant.date = newDate,
+        );
+        vehicleModel = vehicleModel.copyWith(year: newDate.year);
+      },
+      text: StringConstant.carModelYear,
     );
   }
 
-  Widget carPrice() {
-    return CustomTextField(
-      controller: carPriceController,
-      hintText: StringConstant.enterCarPrice,
-      inputType: TextInputType.number,
-      inputFormatters: [
-        FilteringTextInputFormatter.digitsOnly,
-        CurrencyInputFormatter(),
-      ],
-      action: TextInputAction.done,
+  Widget _carPrice() {
+    return CustomPriceTextField(
       onChanged: (p0) {
         vehicleModel = vehicleModel.copyWith(price: p0);
       },
+      hintText: StringConstant.enterCarPrice,
     );
   }
 }
