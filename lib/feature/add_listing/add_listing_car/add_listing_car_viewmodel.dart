@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rental_sale_app/core/companents/custom_toastMessage.dart';
 import 'package:rental_sale_app/core/constants/date_constant.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/core/enums/brand.dart';
 import 'package:rental_sale_app/core/enums/colors.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/add_listing_car_view.dart';
@@ -83,29 +85,12 @@ abstract class AddListingCarViewModel extends State<AddListingCarView> {
         uuid,
         vehicleModel,
       );
-
-      showCustomToast();
+      fToast?.showToast(
+        child: const CustomToastMessage(text: StringConstant.carAddedtoAd),
+        toastDuration: const Duration(seconds: 1),
+      );
     } catch (error) {
       print(error);
     }
-  }
-
-  void showCustomToast() {
-    final Widget toast = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        color: Colors.blueGrey,
-      ),
-      child: const Text(
-        'Araç İlana Eklendi ',
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-
-    fToast?.showToast(
-      child: toast,
-      toastDuration: const Duration(seconds: 1),
-    );
   }
 }

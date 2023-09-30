@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sale_app/core/companents/custom_toastMessage.dart';
 import 'package:rental_sale_app/core/companents/widgets/car_details.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
 import 'package:rental_sale_app/feature/rental_sale_view/car/rental_sale_car_viewmodel.dart';
 
@@ -57,6 +59,11 @@ class _RentalSaleCarViewState extends RentalSaleCarViewModel {
         setState(() {});
         model.isFavorite = !model.isFavorite!;
         await _savedFavorite(model);
+        fToast?.showToast(
+          child:
+              const CustomToastMessage(text: StringConstant.carAddedtoFavorite),
+          toastDuration: const Duration(seconds: 1),
+        );
       },
     );
   }

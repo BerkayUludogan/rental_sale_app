@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rental_sale_app/core/companents/custom_toastmessage.dart';
 import 'package:rental_sale_app/core/constants/date_constant.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/core/enums/brand.dart';
 import 'package:rental_sale_app/core/enums/colors.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
@@ -17,9 +20,14 @@ abstract class AddListingMotoCycleViewModel
   late ICacheManager<VehicleModel> cacheManager;
   VehicleModel vehicleModel = VehicleModel();
 
+  FToast? fToast;
+
   @override
   void initState() {
     super.initState();
+
+    fToast = FToast();
+    fToast?.init(context);
 
     brandList = List.generate(
       MotoCycleBrand.values.length,
@@ -59,6 +67,10 @@ abstract class AddListingMotoCycleViewModel
     await cacheManager.putItem(
       uuid,
       vehicleModel,
+    );
+    fToast?.showToast(
+      child: const CustomToastMessage(text: StringConstant.motorcycleAddedtoAd),
+      toastDuration: const Duration(seconds: 1),
     );
   }
 }

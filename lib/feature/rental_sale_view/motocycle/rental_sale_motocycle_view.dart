@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sale_app/core/companents/custom_toastMessage.dart';
 import 'package:rental_sale_app/core/companents/widgets/motocycle_details.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
 import 'package:rental_sale_app/feature/rental_sale_view/motocycle/rental_sale_motocycle_viewmodel.dart';
 
@@ -61,6 +63,11 @@ class _RentalSaleMotocycleViewState extends RentalSaleMotocycleViewModel {
           model.isFavorite = !model.isFavorite!;
         });
         await _savedFavorite(model);
+        fToast?.showToast(
+          child: const CustomToastMessage(
+              text: StringConstant.motocycleAddedtoFavorite),
+          toastDuration: const Duration(seconds: 1),
+        );
       },
     );
   }

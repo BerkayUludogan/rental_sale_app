@@ -5,6 +5,19 @@ final class StringConstant {
   const StringConstant._();
   static const String appTitle = 'Rental and Sale ';
   static const String buy = 'SATIN AL';
+
+  static const String carAddedtoAd = 'Araba İlana Eklendi';
+  static const String motorcycleAddedtoAd = 'Motorsiklet İlana Eklendi';
+  static const String bicycleAddedtoAd = 'Bisiklet İlana Eklendi';
+
+  static const String carPurchased = 'Araba Satın Alındı';
+  static const String motocyclePurchased = 'Motorsiklet Satın Alındı';
+  static const String bicyclePurchased = 'Bisiklet Satın Alındı';
+
+  static const String carAddedtoFavorite = 'Araba Favoriye Eklendi';
+  static const String motocycleAddedtoFavorite = 'Motorsiklet Favoriye Eklendi';
+  static const String bicycleAddedtoFavorite = 'Bisiklet Favoriye Eklendi';
+
   static const String carBrand = 'Araba Markası';
   static const String carModel = 'Araba Modeli';
   static const String carColor = 'Araba Rengi';

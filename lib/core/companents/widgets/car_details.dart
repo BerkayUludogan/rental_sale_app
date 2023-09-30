@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
+import 'package:rental_sale_app/core/companents/custom_toastMessage.dart';
 import 'package:rental_sale_app/core/constants/color_constant.dart';
 import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
@@ -17,10 +19,14 @@ class CarDetailsView extends StatefulWidget {
 }
 
 class _CarDetailsViewState extends State<CarDetailsView> {
+  FToast? fToast;
+
   @override
   void initState() {
     super.initState();
     init();
+    fToast = FToast();
+    fToast?.init(context);
   }
 
   Future<void> init() async {
@@ -65,6 +71,10 @@ class _CarDetailsViewState extends State<CarDetailsView> {
           await cacheManager.putItem(
             widget.model.id!,
             widget.model,
+          );
+          fToast?.showToast(
+            child: const CustomToastMessage(text: StringConstant.carPurchased),
+            toastDuration: const Duration(seconds: 1),
           );
         },
         style: ElevatedButton.styleFrom(

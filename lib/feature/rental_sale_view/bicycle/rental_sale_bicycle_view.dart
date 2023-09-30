@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sale_app/core/companents/custom_toastMessage.dart';
 import 'package:rental_sale_app/core/companents/widgets/bicycle_details.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_bicycle/model/bicycle_model.dart';
 import 'package:rental_sale_app/feature/rental_sale_view/bicycle/rental_sale_bicycle_viewmodel.dart';
 
@@ -57,6 +59,11 @@ class _RentalSaleBicycleViewState extends RentalSaleBicycleViewModel {
         setState(() {});
         model.isFavorite = !model.isFavorite!;
         await _savedFavorite(model);
+        fToast?.showToast(
+          child: const CustomToastMessage(
+              text: StringConstant.bicycleAddedtoFavorite),
+          toastDuration: const Duration(seconds: 1),
+        );
       },
     );
   }

@@ -1,43 +1,20 @@
-/* import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
 
-class CustomToastMessage extends StatefulWidget {
-  const CustomToastMessage({super.key});
-
-  @override
-  State<CustomToastMessage> createState() => _CustomToastMessageState();
-}
-
-class _CustomToastMessageState extends State<CustomToastMessage> {
-  FToast? fToast;
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class CustomToastMessage extends StatelessWidget {
+  const CustomToastMessage({required this.text, super.key});
+  final String text;
   @override
   Widget build(BuildContext context) {
-    return showCustomToast;
-  }
-
-  Widget get showCustomToast {
-    Widget toast = Container(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         color: Colors.blueGrey,
       ),
-      child: const Text(
-        'Araç İlana Eklendi ',
-        style: TextStyle(color: Colors.white),
+      child: Text(
+        text,
+        style: const TextStyle(color: Colors.white),
       ),
     );
-
-    fToast?.showToast(
-      child: toast,
-      toastDuration: const Duration(seconds: 1),
-    );
-    return toast;
   }
 }
- */

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rental_sale_app/core/companents/custom_toastMessage.dart';
 import 'package:rental_sale_app/core/constants/date_constant.dart';
+import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/core/enums/brand.dart';
 import 'package:rental_sale_app/core/enums/colors.dart';
 import 'package:rental_sale_app/core/utils/bicycle.dart';
@@ -17,9 +20,14 @@ abstract class AddListingBicycleViewModel extends State<AddListingBicycleView> {
   late ICacheManager<BicycleModel> cacheManager;
   BicycleModel bicycleModel = BicycleModel();
 
+  FToast? fToast;
+
   @override
   void initState() {
     super.initState();
+
+    fToast = FToast();
+    fToast?.init(context);
 
     brandList = List.generate(
       BicycleBrand.values.length,
@@ -67,10 +75,15 @@ abstract class AddListingBicycleViewModel extends State<AddListingBicycleView> {
         bicycleModel.price == null ||
         bicycleModel.rearBrake == null ||
         bicycleModel.wheelSize == null) return;
+
     await cacheManager.putItem(
       uuid,
       bicycleModel,
     );
-    print('Kayit başarılı');
+
+    fToast?.showToast(
+      child: const CustomToastMessage(text: StringConstant.bicycleAddedtoAd),
+      toastDuration: const Duration(seconds: 1),
+    );
   }
 }
