@@ -5,6 +5,7 @@ import 'package:rental_sale_app/core/constants/padding_constant.dart';
 import 'package:rental_sale_app/core/enums/colors.dart';
 import 'package:rental_sale_app/core/extensions/context_extension.dart';
 
+// ignore: must_be_immutable
 class CustomChoosedColor extends StatelessWidget {
   CustomChoosedColor({
     required this.choosedValue,

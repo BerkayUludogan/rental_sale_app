@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rental_sale_app/core/companents/custom_dropdown.dart';
 import 'package:rental_sale_app/core/constants/color_constant.dart';
 import 'package:rental_sale_app/core/constants/padding_constant.dart';
-import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/core/extensions/context_extension.dart';
 
 class CustomChoosedBrand extends StatelessWidget {

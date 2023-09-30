@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:rental_sale_app/core/companents/custom_bicycle_dropdown.dart';
-import 'package:rental_sale_app/core/companents/custom_choosedbrand.dart';
 import 'package:rental_sale_app/core/companents/custom_choosedcolor_field.dart';
 import 'package:rental_sale_app/core/companents/custom_date_picker.dart';
 import 'package:rental_sale_app/core/companents/custom_textfield.dart';

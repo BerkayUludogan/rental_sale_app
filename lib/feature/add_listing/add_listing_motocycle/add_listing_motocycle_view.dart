@@ -5,7 +5,6 @@ import 'package:rental_sale_app/core/companents/custom_choosedcolor_field.dart';
 import 'package:rental_sale_app/core/companents/custom_model_text.dart';
 import 'package:rental_sale_app/core/companents/custom_modelyear_field.dart';
 import 'package:rental_sale_app/core/companents/custom_price_text_field.dart';
-import 'package:rental_sale_app/core/companents/custom_textfield.dart';
 import 'package:rental_sale_app/core/constants/date_constant.dart';
 import 'package:rental_sale_app/core/constants/padding_constant.dart';
 import 'package:rental_sale_app/core/constants/string_constant.dart';
