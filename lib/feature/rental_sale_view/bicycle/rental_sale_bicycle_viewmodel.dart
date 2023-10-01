@@ -9,6 +9,7 @@ abstract class RentalSaleBicycleViewModel extends State<RentalSaleBicycleView> {
   late ICacheManager<BicycleModel> cacheManager;
   List<BicycleModel> bicycleModelList = [];
   BicycleModel bicycleModel = BicycleModel();
+
   FToast? fToast;
 
   @override

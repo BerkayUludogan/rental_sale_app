@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomToastMessage extends StatelessWidget {
   const CustomToastMessage({required this.text, super.key});
+
   final String text;
+
   @override
   Widget build(BuildContext context) {
     return Container(

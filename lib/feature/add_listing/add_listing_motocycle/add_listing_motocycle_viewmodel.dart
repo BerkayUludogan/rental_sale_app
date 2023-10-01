@@ -38,9 +38,10 @@ abstract class AddListingMotoCycleViewModel
       (index) => EnumColor.values[index].name,
     );
     vehicleModel = vehicleModel.copyWith(
-        brand: brandList.first,
-        color: colorList.first,
-        year: DateConstant.date.year);
+      brand: brandList.first,
+      color: colorList.first,
+      year: DateConstant.date.year,
+    );
     cacheManager = VehicleCacheManager(vehicleModel);
 
     AddListingViewModel.instance.whenComplate = saveDataToHive;

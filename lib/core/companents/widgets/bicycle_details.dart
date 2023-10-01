@@ -11,22 +11,22 @@ import 'package:rental_sale_app/product/manager/cache_manager.dart';
 // ignore: must_be_immutable
 class BicycleDetailsView extends StatefulWidget {
   BicycleDetailsView({required this.model, super.key});
-
   BicycleModel model;
 
   @override
   State<BicycleDetailsView> createState() => _BicycleDetailsViewState();
 }
 
-late ICacheManager<BicycleModel> cacheManager;
-
 class _BicycleDetailsViewState extends State<BicycleDetailsView> {
+  late ICacheManager<BicycleModel> cacheManager;
+
   FToast? fToast;
 
   @override
   void initState() {
     super.initState();
     init();
+
     fToast = FToast();
     fToast?.init(context);
   }
@@ -91,25 +91,35 @@ class _BicycleDetailsViewState extends State<BicycleDetailsView> {
         height: 40,
         width: 130,
         child: ElevatedButton(
-          onPressed: () async {
-            widget.model = widget.model.copyWith(isSold: true);
-            await cacheManager.putItem(
-              widget.model.id!,
-              widget.model,
-            );
-            fToast?.showToast(
-              child: const CustomToastMessage(
-                  text: StringConstant.bicyclePurchased),
-              toastDuration: const Duration(seconds: 1),
-            );
-          },
+          onPressed: widget.model.isSold
+              ? null
+              : () async {
+                  setState(() {
+                    widget.model = widget.model.copyWith(isSold: true);
+                  });
+                  await cacheManager.putItem(
+                    widget.model.id!,
+                    widget.model,
+                  );
+                  fToast?.showToast(
+                    child: const CustomToastMessage(
+                      text: StringConstant.bicyclePurchased,
+                    ),
+                    toastDuration: const Duration(seconds: 1),
+                  );
+                },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.lightBlue.shade200,
           ),
-          child: Text(
-            StringConstant.purchased,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
-          ),
+          child: widget.model.isSold
+              ? Text(
+                  StringConstant.purchased,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
+                )
+              : Text(
+                  StringConstant.buy,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
+                ),
         ),
       ),
     );
@@ -173,14 +183,16 @@ class _BicycleDetailsViewState extends State<BicycleDetailsView> {
 
   Widget _customBicycleFrontBrake() {
     return _customText(
-        informationText: StringConstant.bicycleFrontBrake,
-        value: widget.model.frontBrake!);
+      informationText: StringConstant.bicycleFrontBrake,
+      value: widget.model.frontBrake!,
+    );
   }
 
   Widget _customBicycleRearBrake() {
     return _customText(
-        informationText: StringConstant.bicycleRearBrake,
-        value: widget.model.rearBrake!);
+      informationText: StringConstant.bicycleRearBrake,
+      value: widget.model.rearBrake!,
+    );
   }
 
   Widget _customBicycleNumberOfGears() {

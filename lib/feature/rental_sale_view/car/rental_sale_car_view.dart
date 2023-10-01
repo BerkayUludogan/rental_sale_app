@@ -59,13 +59,25 @@ class _RentalSaleCarViewState extends RentalSaleCarViewModel {
         setState(() {});
         model.isFavorite = !model.isFavorite!;
         await _savedFavorite(model);
-        fToast?.showToast(
-          child:
-              const CustomToastMessage(text: StringConstant.carAddedtoFavorite),
-          toastDuration: const Duration(seconds: 1),
-        );
+        _addingAndRemovingFavorites(model);
       },
     );
+  }
+
+  void _addingAndRemovingFavorites(VehicleModel model) {
+    model.isFavorite!
+        ? fToast?.showToast(
+            child: const CustomToastMessage(
+              text: StringConstant.carAddedtoFavorite,
+            ),
+            toastDuration: const Duration(seconds: 1),
+          )
+        : fToast?.showToast(
+            child: const CustomToastMessage(
+              text: StringConstant.carRemovedFavorites,
+            ),
+            toastDuration: const Duration(seconds: 1),
+          );
   }
 
   Text _subTitle(VehicleModel model) {

@@ -63,13 +63,25 @@ class _RentalSaleMotocycleViewState extends RentalSaleMotocycleViewModel {
           model.isFavorite = !model.isFavorite!;
         });
         await _savedFavorite(model);
-        fToast?.showToast(
-          child: const CustomToastMessage(
-              text: StringConstant.motocycleAddedtoFavorite),
-          toastDuration: const Duration(seconds: 1),
-        );
+        _addingAndRemovingFavorites(model);
       },
     );
+  }
+
+  void _addingAndRemovingFavorites(VehicleModel model) {
+    model.isFavorite!
+        ? fToast?.showToast(
+            child: const CustomToastMessage(
+              text: StringConstant.motocycleAddedtoFavorite,
+            ),
+            toastDuration: const Duration(seconds: 1),
+          )
+        : fToast?.showToast(
+            child: const CustomToastMessage(
+              text: StringConstant.motocycleRemovedFavorites,
+            ),
+            toastDuration: const Duration(seconds: 1),
+          );
   }
 
   Text _title(VehicleModel model) {

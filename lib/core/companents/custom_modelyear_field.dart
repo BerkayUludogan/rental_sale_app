@@ -5,8 +5,11 @@ import 'package:rental_sale_app/core/constants/padding_constant.dart';
 import 'package:rental_sale_app/core/extensions/context_extension.dart';
 
 class CustomModelYearField extends StatelessWidget {
-  const CustomModelYearField(
-      {required this.onDateTimeChanged, required this.text, super.key});
+  const CustomModelYearField({
+    required this.onDateTimeChanged,
+    required this.text,
+    super.key,
+  });
   final void Function(DateTime) onDateTimeChanged;
   final String text;
   @override

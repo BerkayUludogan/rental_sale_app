@@ -19,13 +19,10 @@ class AddListingCarView extends StatefulWidget {
 }
 
 class _AddListingCarState extends AddListingCarViewModel {
-  bool isKeyboardOpen = false;
   @override
   Widget build(BuildContext context) => _mainBody();
 
   Widget _mainBody() {
-    isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-
     return BaseView(
       child: Scaffold(
         body: SingleChildScrollView(

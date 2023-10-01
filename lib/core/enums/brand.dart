@@ -1,14 +1,15 @@
 enum CarBrand {
-  HYUNDAI,
-  BMW,
-  AUDI,
-  MERCEDES,
-  VOLKSWAGEN,
-  TOYOTA,
-  HONDA,
-  NISSAN,
-  RENAULTH,
-  FIAT
+  togg,
+  hyundai,
+  bmw,
+  audi,
+  mercedes,
+  volkswagen,
+  toyota,
+  honda,
+  nissan,
+  renaulth,
+  fiat
 }
 
 enum BicycleBrand {

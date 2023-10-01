@@ -10,18 +10,17 @@ class FavoritedView extends StatefulWidget {
   State<FavoritedView> createState() => _FavoritedViewState();
 }
 
-late ICacheManager<VehicleModel> cacheManager;
-
-List<VehicleModel> vehicleModelList = [];
-VehicleModel vehicleModel = VehicleModel();
-
 class _FavoritedViewState extends State<FavoritedView> {
+  late ICacheManager<VehicleModel> cacheManager;
+
+  List<VehicleModel> vehicleModelList = [];
+  VehicleModel vehicleModel = VehicleModel();
   @override
   void initState() {
     cacheManager = VehicleCacheManager(VehicleModel());
     super.initState();
     vehicleModelList.clear();
-    print(cacheManager);
+    debugPrint(cacheManager.toString());
     fetchDatas();
   }
 

@@ -18,6 +18,12 @@ final class StringConstant {
   static const String motocycleAddedtoFavorite = 'Motorsiklet Favoriye Eklendi';
   static const String bicycleAddedtoFavorite = 'Bisiklet Favoriye Eklendi';
 
+  static const String carRemovedFavorites = 'Araba Favorilerden Çıkarıldı';
+  static const String motocycleRemovedFavorites =
+      'Motorsiklet Favorilerden Çıkarıldı';
+  static const String bicycleRemovedFavorites =
+      'Bisiklet Favorilerden Çıkarıldı';
+
   static const String carBrand = 'Araba Markası';
   static const String carModel = 'Araba Modeli';
   static const String carColor = 'Araba Rengi';

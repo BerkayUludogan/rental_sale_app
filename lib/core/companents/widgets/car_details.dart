@@ -5,7 +5,6 @@ import 'package:rental_sale_app/core/companents/custom_toastMessage.dart';
 import 'package:rental_sale_app/core/constants/color_constant.dart';
 import 'package:rental_sale_app/core/constants/string_constant.dart';
 import 'package:rental_sale_app/feature/add_listing/add_listing_car/model/vehicle_model.dart';
-import 'package:rental_sale_app/feature/my_account/favorited_view.dart';
 import 'package:rental_sale_app/product/manager/cache_manager.dart';
 import 'package:rental_sale_app/product/manager/vehicle_cache_manager.dart';
 
@@ -13,12 +12,13 @@ import 'package:rental_sale_app/product/manager/vehicle_cache_manager.dart';
 class CarDetailsView extends StatefulWidget {
   CarDetailsView({required this.model, super.key});
   VehicleModel model;
-  late ICacheManager<VehicleModel> cacheManager;
   @override
   State<CarDetailsView> createState() => _CarDetailsViewState();
 }
 
 class _CarDetailsViewState extends State<CarDetailsView> {
+  late ICacheManager<VehicleModel> cacheManager;
+
   FToast? fToast;
 
   @override
@@ -66,24 +66,35 @@ class _CarDetailsViewState extends State<CarDetailsView> {
   Center _customPurchasedButton(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        onPressed: () async {
-          widget.model = widget.model.copyWith(isSold: true);
-          await cacheManager.putItem(
-            widget.model.id!,
-            widget.model,
-          );
-          fToast?.showToast(
-            child: const CustomToastMessage(text: StringConstant.carPurchased),
-            toastDuration: const Duration(seconds: 1),
-          );
-        },
+        onPressed: widget.model.isSold == true
+            ? null
+            : () async {
+                setState(() {
+                  widget.model = widget.model.copyWith(isSold: true);
+                });
+                await cacheManager.putItem(
+                  widget.model.id!,
+                  widget.model,
+                );
+                fToast?.showToast(
+                  child: const CustomToastMessage(
+                    text: StringConstant.carPurchased,
+                  ),
+                  toastDuration: const Duration(seconds: 1),
+                );
+              },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.lightBlue.shade200,
         ),
-        child: Text(
-          StringConstant.purchased,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
-        ),
+        child: widget.model.isSold
+            ? Text(
+                StringConstant.purchased,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
+              )
+            : Text(
+                StringConstant.buy,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
+              ),
       ),
     );
   }

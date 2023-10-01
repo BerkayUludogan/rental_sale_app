@@ -85,10 +85,8 @@ class VehicleTypeAdapter extends TypeAdapter<VehicleType> {
     switch (obj) {
       case VehicleType.MOTOCYCLE:
         writer.writeByte(0);
-        break;
       case VehicleType.CAR:
         writer.writeByte(1);
-        break;
     }
   }
 

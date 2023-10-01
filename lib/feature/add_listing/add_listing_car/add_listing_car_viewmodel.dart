@@ -66,7 +66,6 @@ abstract class AddListingCarViewModel extends State<AddListingCarView> {
     carModelController.dispose();
     carColorController.dispose();
     carModelYearController.dispose();
-    carPriceController.dispose();
   }
 
   Future<void> saveDataToHive() async {
@@ -90,7 +89,7 @@ abstract class AddListingCarViewModel extends State<AddListingCarView> {
         toastDuration: const Duration(seconds: 1),
       );
     } catch (error) {
-      print(error);
+      debugPrint(error.toString());
     }
   }
 }

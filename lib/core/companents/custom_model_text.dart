@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:rental_sale_app/core/companents/custom_textfield.dart';
 
 class CustomModelText extends StatelessWidget {
-  const CustomModelText(
-      {required this.hintText, super.key, required this.onChanged});
+  const CustomModelText({
+    required this.hintText,
+    required this.onChanged,
+    super.key,
+  });
   final String hintText;
   final void Function(String)? onChanged;
   @override
