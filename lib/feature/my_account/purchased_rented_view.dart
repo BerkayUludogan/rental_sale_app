@@ -14,18 +14,18 @@ class PurchasedRentedView extends StatefulWidget {
 }
 
 late ICacheManager<VehicleModel> cacheManager;
-late ICacheManager<BicycleModel> bicycleCacheManager;
-
+late ICacheManager<BicycleModel> cacheManager2;
 List<VehicleModel> vehicleModelList = [];
 List<BicycleModel> bicycleModelList = [];
 VehicleModel vehicleModel = VehicleModel();
 BicycleModel bicycleModel = BicycleModel();
+List<Object> allItems = [];
 
 class _PurchasedRentedViewState extends State<PurchasedRentedView> {
   @override
   void initState() {
     cacheManager = VehicleCacheManager(VehicleModel());
-    bicycleCacheManager = BicycleCacheManager(BicycleModel());
+    cacheManager2 = BicycleCacheManager(BicycleModel());
     super.initState();
     vehicleModelList.clear();
     bicycleModelList.clear();
@@ -36,83 +36,87 @@ class _PurchasedRentedViewState extends State<PurchasedRentedView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: vehicleModelList.length,
+        itemCount: allItems.length,
         itemBuilder: (BuildContext context, int index) {
-          final model = vehicleModelList[index];
+          allItems.shuffle();
 
-          return Card(
-            child: ListTile(
-              title: Text(model.brand!.toUpperCase()),
-              subtitle: Text(model.model!.toUpperCase()),
-              leading: Text(
-                model.year.toString(),
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              trailing: const Text(
-                StringConstant.purchased,
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-          );
+          final dynamic model = allItems[index];
+
+          if (model is VehicleModel) {
+            return _buildVehicleCard(model);
+          } else if (model is BicycleModel) {
+            return _buildBicycleCard(model);
+          }
         },
+      ),
+    );
+  }
+
+  Card _buildBicycleCard(BicycleModel model) {
+    return Card(
+      child: ListTile(
+        title: Text(model.brand!.toUpperCase()),
+        subtitle: Text(model.frameType!.toUpperCase()),
+        leading: Text(
+          model.year.toString(),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        trailing: const Text(
+          StringConstant.purchased,
+          style: TextStyle(color: Colors.red),
+        ),
+      ),
+    );
+  }
+
+  Card _buildVehicleCard(VehicleModel model) {
+    return Card(
+      child: ListTile(
+        title: Text(model.brand!.toUpperCase()),
+        subtitle: Text(model.model!.toUpperCase()),
+        leading: Text(
+          model.year.toString(),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        trailing: const Text(
+          StringConstant.purchased,
+          style: TextStyle(color: Colors.red),
+        ),
       ),
     );
   }
 
   Future<void> fetchDatas() async {
     await cacheManager.init();
+    await cacheManager2.init();
     final vehicleModel = cacheManager.getValues();
-    if (vehicleModel == null) return;
-    for (final element in vehicleModel) {
-      if (element.isSold == false) continue;
-      setState(() {
-        vehicleModelList.add(element);
-      });
-    }
-  }
+    final bicycleModel = cacheManager2.getValues();
 
-/*   Future<void> fetchDatas2() async {
-    await bicycleCacheManager.init();
-    final bicycleModel = bicycleCacheManager.getValues();
-    if (bicycleModel == null) return;
+    if (bicycleModel == null || vehicleModel == null) return;
+
     for (final element in bicycleModel) {
-      if (element.isSold == false) continue;
+      if (element.isSold == false || bicycleModelList.contains(element)) {
+        continue;
+      }
       setState(() {
         bicycleModelList.add(element);
       });
     }
-  } */
-/*  
-Scaffold(
-      body: ListView.builder(
-        itemCount: vehicleModelList.length,
-        itemBuilder: (BuildContext context, int index) {
-          final model = vehicleModelList[index];
-          return Card(
-            child: ListTile(
-              title: Text(model.isFavorite.toString()),
-              subtitle: Text(model.model!),
-            ),
-          );
-        },
-      ),
-    );
 
-
- Future<void> fetchDatas() async {
-    await cacheManager.init();
-    final vehicleModel = cacheManager.getValues();
-    if (vehicleModel == null) return;
     for (final element in vehicleModel) {
-      if (element.isFavorite == false) continue;
+      if (element.isSold == false || vehicleModelList.contains(element)) {
+        continue;
+      }
       setState(() {
         vehicleModelList.add(element);
       });
-
-      print(vehicleModelList);
     }
-  } */
+    allItems = [...vehicleModelList, ...bicycleModelList];
+  }
 }
