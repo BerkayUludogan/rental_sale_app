@@ -80,7 +80,6 @@ class _RentalSaleMotocycleViewState extends RentalSaleMotocycleViewModel {
             child: const CustomToastMessage(
               text: StringConstant.motocycleRemovedFavorites,
             ),
-            toastDuration: const Duration(seconds: 1),
           );
   }
 

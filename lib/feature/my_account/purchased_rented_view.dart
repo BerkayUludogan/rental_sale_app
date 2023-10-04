@@ -19,7 +19,8 @@ List<VehicleModel> vehicleModelList = [];
 List<BicycleModel> bicycleModelList = [];
 VehicleModel vehicleModel = VehicleModel();
 BicycleModel bicycleModel = BicycleModel();
-List<Object> allItems = [];
+List<dynamic> allItems = [];
+bool isLoading = false;
 
 class _PurchasedRentedViewState extends State<PurchasedRentedView> {
   @override
@@ -32,23 +33,40 @@ class _PurchasedRentedViewState extends State<PurchasedRentedView> {
     fetchDatas();
   }
 
+  void changeLoading() {
+    isLoading = !isLoading;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        itemCount: allItems.length,
-        itemBuilder: (BuildContext context, int index) {
-          allItems.shuffle();
+      body: isLoading == true
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : allItems.isEmpty
+              ? const Center(
+                  child: Text(
+                    'Favoriye Alınmış Araç Bulunamadı.',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: allItems.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    allItems.shuffle();
 
-          final dynamic model = allItems[index];
+                    final dynamic model = allItems[index];
 
-          if (model is VehicleModel) {
-            return _buildVehicleCard(model);
-          } else if (model is BicycleModel) {
-            return _buildBicycleCard(model);
-          }
-        },
-      ),
+                    if (model is VehicleModel) {
+                      return _buildVehicleCard(model);
+                    }
+                    if (model is BicycleModel) {
+                      return _buildBicycleCard(model);
+                    }
+                    return null;
+                  },
+                ),
     );
   }
 
@@ -93,30 +111,39 @@ class _PurchasedRentedViewState extends State<PurchasedRentedView> {
   }
 
   Future<void> fetchDatas() async {
-    await cacheManager.init();
-    await cacheManager2.init();
-    final vehicleModel = cacheManager.getValues();
-    final bicycleModel = cacheManager2.getValues();
+    try {
+      changeLoading();
+      await cacheManager.init();
+      await cacheManager2.init();
+      final vehicleModel = cacheManager.getValues();
+      final bicycleModel = cacheManager2.getValues();
 
-    if (bicycleModel == null || vehicleModel == null) return;
+      if (bicycleModel == null || vehicleModel == null) return;
 
-    for (final element in bicycleModel) {
-      if (element.isSold == false || bicycleModelList.contains(element)) {
-        continue;
+      for (final element in bicycleModel) {
+        if (element.isSold == false || bicycleModelList.contains(element)) {
+          continue;
+        }
+        setState(() {
+          bicycleModelList.add(element);
+        });
       }
-      setState(() {
-        bicycleModelList.add(element);
-      });
-    }
 
-    for (final element in vehicleModel) {
-      if (element.isSold == false || vehicleModelList.contains(element)) {
-        continue;
+      for (final element in vehicleModel) {
+        if (element.isSold == false || vehicleModelList.contains(element)) {
+          continue;
+        }
+        setState(() {
+          vehicleModelList.add(element);
+        });
       }
-      setState(() {
-        vehicleModelList.add(element);
-      });
+
+      allItems = [...vehicleModelList, ...bicycleModelList];
+    } catch (error) {
+      debugPrint('Hata oluştu: $error');
+    } finally {
+      changeLoading();
+      setState(() {});
     }
-    allItems = [...vehicleModelList, ...bicycleModelList];
   }
 }
